@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -33,6 +34,8 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function Login() {
+  const [email, setEmail] = useState();
+  const [password, setpassword] = useState();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -40,8 +43,19 @@ export default function Login() {
       email: data.get("email"),
       password: data.get("password"),
     });
+    alert(email);
+    // alert("hello", data.get("email"));
   };
 
+  const handleEmailChange = (e: any) => {
+    var input = e.target.value;
+    setEmail(input);
+  };
+
+  const handlePasswordChange = (e: any) => {
+    var input = e.target.value;
+    setpassword(input);
+  };
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -72,6 +86,7 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleEmailChange}
             />
             <TextField
               margin="normal"
@@ -82,6 +97,7 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handlePasswordChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
